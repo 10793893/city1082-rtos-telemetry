@@ -5,7 +5,7 @@
 extern struct dataSet myData;
 
 void actuatorsThread() {
-    DigitalOut lightIndicator(P12_3);
+    DigitalOut lightIndicator(P10_0);
     DigitalOut heatIndicator(P0_5);
     while(true){
         if (myData.lightLevel < myData.lightSet) {
