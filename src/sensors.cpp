@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <cmath>
 
-//#define THERM_GND P10_3
+//#define test tes THERM_GND P10_3
 //#define THERM_VCC P10_0
 #define THERM_OUT P10_1
 
