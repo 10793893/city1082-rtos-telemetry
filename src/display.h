@@ -20,7 +20,7 @@
 
 struct dataSet{
     float temperature;
-    float tempSet = 24;
+    float tempSet = 27;
     float tempThresh = 0.5;
     bool heaterStatus = false;
     float lightLevel;
