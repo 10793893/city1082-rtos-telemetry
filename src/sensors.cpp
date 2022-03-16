@@ -12,7 +12,7 @@
 
 
 
-/* Reference resistor in series with the thermistor is of 10kohm */
+/* testtest Reference resistor in series with the thermistor is of 10kohm */
 #define R_REFERENCE                         (float)(10000)
 
 /* A constant of NCP18XH103F03RB thermistor is */
