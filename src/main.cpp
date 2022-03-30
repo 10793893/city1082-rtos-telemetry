@@ -12,7 +12,7 @@
 #include "actuators.h"
 #include "mqtt.h"
 
-// This is my version of main.cpp Andrew
+// This is my version of main.cpp Jamie
 
 // Global data packet
 
