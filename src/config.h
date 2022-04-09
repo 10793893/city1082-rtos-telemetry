@@ -2,7 +2,7 @@
  * Edit this file updating your Thing name and Topic definitions
  */
 
-#define THING_NAME "JS_Thing"  // Unique Iot Thing Name
+#define THING_NAME "JS_Thing"  // Unique Iot Thing Name JS so no clashes
 #define LIGHT_SET_TOPIC "/lightSet"
 #define LIGHT_LEVEL_SET_TOPIC "JS_Thing/lightSet"
 #define LIGHT_LEVEL_TOPIC "/lightLevel"
