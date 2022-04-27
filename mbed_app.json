@@ -2,7 +2,7 @@
     "config": {
         "hostname": {
             "help": "The demo will try to connect to this MQTT broker address on port 1883).",
-            "value": "\"test.mosquitto.org\""
+            "value": "\"192.168.1.176\""
         },
         "use-tls-socket": {
             "value": false
@@ -17,8 +17,8 @@
             "platform.stdio-baud-rate": 115200,
             "platform.default-serial-baud-rate": 115200,
             "nsapi.default-wifi-security": "WPA_WPA2",
-            "nsapi.default-wifi-ssid": "\"AndroidAP\"",
-            "nsapi.default-wifi-password": "\"Kebab123\"",
+            "nsapi.default-wifi-ssid": "\"brackenhillc\"",
+            "nsapi.default-wifi-password": "\"1broches\"",
             "mbed-trace.enable": false,
             "mbed-trace.max-level": "TRACE_LEVEL_DEBUG",
             "rtos.main-thread-stack-size": 8192,
