@@ -277,6 +277,7 @@ public:
             return;
 
           }
+          
       }
       if ((i & 0x1ff) == 0x100) {
           sprintf(buffer, "%3.1f  ", myData.lightLevel);
@@ -299,6 +300,30 @@ public:
             displayText(buffer, 60, 11);
             return;
           }
+
+ }
+      if ((i & 0x1ff) == 0x100) {
+          sprintf(buffer, "%3.1f  ", myData.humidity);
+          message.payload = (void *)buffer;
+          message.payloadlen = strlen(buffer) + 1;
+          strcpy(topic, THING_NAME);
+          strcat(topic, HUMIDITY_TOPIC);
+
+          result = client.publish(topic, message);
+          if (result == 0) {
+            strcat(buffer, topic);
+            strcat(buffer, "      ");
+            displayText(buffer, 1, 14);
+            pubCount++;
+          } 
+          else {
+            sprintf(buffer, "publish humidity level failed %d", result);
+            displayText(buffer, 1, 14);
+            sprintf(buffer, "Pub Fail: %d", pubFailCount++);
+            displayText(buffer, 60, 11);
+            return;
+          }
+          
       }
       if (currHeater != myData.heaterStatus) {
           sprintf(buffer, "%s", myData.heaterStatus?"on":"off");
