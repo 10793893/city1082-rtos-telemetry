@@ -12,6 +12,7 @@
 #define TEMPERATURE_TOPIC "/temp"
 #define HEATER_STATUS "/heaterStatus"
 #define LIGHT_STATUS "/lightStatus"
+#define HUMIDITY_STATUS "/humidity"
 #define GET_TIME_TOPIC "getTime"
 #define TIME_TOPIC "timeStamp"
 #define MQTTClient_QOS2 1

@@ -3,6 +3,7 @@
 #include <ios>
 #include <iostream>
 #include "string.h"
+#include "DHT.h"
 #include <iomanip>
 #include <cmath>
 
@@ -29,6 +30,7 @@
 
 AnalogIn tempVoltage(THERM_OUT);
 AnalogIn lightLevel(LDR_PORT);
+DHT dht(P10_5, DHT::DHT22);
 
 extern struct dataSet myData;
 extern bool displayUp;
@@ -44,6 +46,8 @@ void sendThread(void)
         {
             ThisThread::sleep_for(10ms);
         }
+
+        int h_count = 0;
 //    ThisThread::sleep_for(2s);
     while (true) {
         if (myData.updateDisplay) updateDisplay();
@@ -52,13 +56,21 @@ void sendThread(void)
        
         myData.lightLevel =  readLight();
 
+        if (h_count==30){
+             int err = dht.read();
+            h_count=0;
+        }
+  myData.humidity = dht.getHumidity();
         sprintf(buffer, "%2.1f", myData.temperature);
         displayText(buffer, 15, 2);
         sprintf(buffer, "%2.1f", myData.lightLevel);
         displayText(buffer, 15, 3);
+
+        sprintf(buffer, "%2.1f", myData.humidity);
+        displayText(buffer, 15, 4);
         ThisThread::sleep_for(100ms);
-        
-    }
+        h_count++;
+    } 
 }
 
 float readTemp()
