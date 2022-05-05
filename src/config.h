@@ -12,7 +12,10 @@
 #define TEMPERATURE_TOPIC "/temp"
 #define HEATER_STATUS "/heaterStatus"
 #define LIGHT_STATUS "/lightStatus"
+#define HUMIDITY_STATUS "/humidityStatus"
 #define HUMIDITY_TOPIC "/humidity"
+#define HUMIDITY_LEVEL_SET_TOPIC "JS_Thing/humiditySet"
+#define HUMIDITY_SET_TOPIC "/humiditySet"
 #define GET_TIME_TOPIC "getTime"
 #define TIME_TOPIC "timeStamp"
 #define MQTTClient_QOS2 1

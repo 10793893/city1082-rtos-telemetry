@@ -83,7 +83,10 @@ void updateDisplay() {
     displayText( "%", 21, 3);
     displayText( "Set Light", 26, 3);
     displayText( "%", 43, 3);
+    displayText( "Set Humidity", 26, 4);
+    displayText( "%", 43, 4);
     displayText( "Light Status:\033[?25l", 48, 3);
+    displayText( "Humidity Status:\033[?25l", 48, 4);
     displayText ("Humidty:", 1, 4);
     displayText( "%", 21, 4);
     displayText( "Sub Count:", 44, 12);

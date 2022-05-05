@@ -22,12 +22,15 @@ struct dataSet{
     float temperature;
     float tempSet = 27;
     float tempThresh = 0.5;
-    float humidity;
-    bool heaterStatus = false;
     float lightLevel;
     float lightSet = 40;
     float lightThresh = 5;
     bool lightStatus = false;
+    float humidity;
+    float humiditySet = 20;
+    float humidityThresh = 1;
+    bool humidityStatus = false;
+    bool heaterStatus = false;
     bool wifiStatus = false;
     bool mqttStatus = false;
     bool updateDisplay = false;

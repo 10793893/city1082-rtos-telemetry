@@ -9,6 +9,7 @@ void actuatorsThread() {
     char buffer[80];
     DigitalOut lightIndicator(P12_3);
     DigitalOut heatIndicator(P0_5);
+    DigitalOut humidityIndicator (P10_2);
     while (displayUp == false) {
         ThisThread::sleep_for(10ms);
     }
@@ -25,6 +26,12 @@ void actuatorsThread() {
         else if (myData.temperature > myData.tempSet + myData.tempThresh) {
             heatIndicator = false;
         }
+        if (myData.humidity < myData.humiditySet - myData.humidityThresh) {
+            humidityIndicator = true;
+        }
+        else if (myData.humidity > myData.humiditySet + myData.humidityThresh) {
+            humidityIndicator = false;
+        }
         if (myData.lightStatus != lightIndicator) {
             myData.lightStatus = lightIndicator;
             sprintf(buffer, "%s", lightIndicator?
@@ -36,6 +43,12 @@ void actuatorsThread() {
             sprintf(buffer, "%s", heatIndicator?
                     "\033[1;31mON  \033[1;37m":"\033[1;32mOFF\033[1;37m");
             displayText(buffer, 63, 2);
+            }
+        if (myData.humidityStatus != humidityIndicator) {
+            myData.humidityStatus = humidityIndicator;
+            sprintf(buffer, "%s", humidityIndicator?
+                    "\033[1;31mON  \033[1;37m":"\033[1;32mOFF\033[1;37m");
+            displayText(buffer, 63, 4);
         }
         ThisThread::sleep_for(100ms);
     }

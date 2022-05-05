@@ -51,6 +51,18 @@ void messageTempSetArrived(MQTT::MessageData &md) {
   rxCount++;
   rxLed = !rxLed;
   myData.updateDisplay = true;
+
+  }
+void messageHumiditySetArrived(MQTT::MessageData &md) {
+  MQTT::Message &message = md.message;
+  uint32_t len = md.message.payloadlen;
+  char rxed[len + 1];
+
+  strncpy(&rxed[0], (char *)(&md.message.payload)[0], len);
+  myData.humiditySet = atoi(rxed);
+  rxCount++;
+  rxLed = !rxLed;
+  myData.updateDisplay = true;
 }
 void messageTimeArrived(MQTT::MessageData &md) {
   MQTT::Message &message = md.message;
@@ -110,6 +122,7 @@ public:
     uint32_t lastRC = 0;  // previous loop value of rxCount
     bool currHeater = false;
     bool currLight = false;
+    bool currHumid = false;
     nsapi_size_or_error_t result = _net->connect();
     if (result != 0) {
       sprintf(buffer, "Error! _net->connect() returned: %d\r\n", result);
@@ -213,6 +226,16 @@ public:
     else
       sprintf(buffer, "Subscribed to %s", topic);
     displayText(buffer, 1, 5);
+    strcpy(topic, THING_NAME);
+    strcat(topic, HUMIDITY_SET_TOPIC); // this method fails to set up Callback correctly
+    result = client.subscribe(HUMIDITY_LEVEL_SET_TOPIC, MQTT::QOS0,
+                              messageHumiditySetArrived);
+    if (result != 0)
+      sprintf(buffer, "Subscription Error %d", result);
+    else
+      sprintf(buffer, "Subscribed to %s", topic);
+    displayText(buffer, 30, 5);
+
     strcpy(topic, THING_NAME);
     strcat(topic, TEMP_SET_TOPIC); // this method fails to set up Callback correctly
     result = client.subscribe(TEMPERATURE_SET_TOPIC, MQTT::QOS0,
@@ -370,6 +393,30 @@ public:
             return;
           }
           currLight = myData.lightStatus;
+
+          }
+      if (currHumid != myData.humidityStatus) {
+          sprintf(buffer, "%s", myData.humidityStatus?"on":"off");
+          message.payload = (void *)buffer;
+          message.payloadlen = strlen(buffer);
+          strcpy(topic, THING_NAME);
+          strcat(topic, HUMIDITY_STATUS);
+
+          result = client.publish(topic, message);
+          if (result == 0) {
+            strcat(buffer, topic);
+            strcat(buffer, "      ");
+            displayText(buffer, 1, 13);
+            pubCount++;
+          } 
+          else {
+            sprintf(buffer, "publish humid status failed %d", result);
+            displayText(buffer, 1, 13);
+            sprintf(buffer, "Pub Fail: %d", pubFailCount++);
+            displayText(buffer, 60, 11);
+            return;
+          }
+          currHumid = myData.humidityStatus;
       }
       if (pubCount > lastPC) {
             sprintf(buffer, "%5d", pubCount);
