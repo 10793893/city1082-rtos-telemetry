@@ -87,7 +87,7 @@ void updateDisplay() {
     displayText( "%", 43, 4);
     displayText( "Light Status:\033[?25l", 48, 3);
     displayText( "Humid Status:\033[?25l", 48, 4);
-    displayText ("Humidty:", 1, 4);
+    displayText( "Humidty:", 1, 4);
     displayText( "%", 21, 4);
     displayText( "Sub Count:", 44, 12);
     displayText( "Pub Count:", 44, 13);
@@ -106,7 +106,7 @@ void updateDisplay() {
 
     sprintf(buffer, "\033[1;33m%2.1f", myData.lightSet);
     displayText(buffer, 37, 3);
-    sprintf(buffer, "%2.1s", myData.lightStatus?
+    sprintf(buffer, "%s", myData.lightStatus?
                     "\033[1;31mON  \033[1;37m":"\033[1;32mOFF\033[1;37m");
     displayText(buffer, 63, 3);
 

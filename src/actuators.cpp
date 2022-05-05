@@ -27,10 +27,10 @@ void actuatorsThread() {
             heatIndicator = false;
         }
         if (myData.humidity < myData.humiditySet - myData.humidityThresh) {
-            humidityIndicator = true;
+            humidityIndicator = false;
         }
         else if (myData.humidity > myData.humiditySet + myData.humidityThresh) {
-            humidityIndicator = false;
+            humidityIndicator = true;
         }
         if (myData.lightStatus != lightIndicator) {
             myData.lightStatus = lightIndicator;
