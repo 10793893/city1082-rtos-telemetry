@@ -56,7 +56,7 @@ void sendThread(void)
        
         myData.lightLevel =  readLight();
 
-        if (h_count==30){
+        if (h_count==50){
              int err = dht.read();
             h_count=0;
         }
