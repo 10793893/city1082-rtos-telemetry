@@ -30,7 +30,7 @@
 
 AnalogIn tempVoltage(THERM_OUT);
 AnalogIn lightLevel(LDR_PORT);
-DHT dht(P10_5, DHT::DHT22);
+DHT dht(P10_5, DHT::DHT11);
 
 extern struct dataSet myData;
 extern bool displayUp;
@@ -56,11 +56,13 @@ void sendThread(void)
        
         myData.lightLevel =  readLight();
 
+         myData.humidity = dht.getHumidity();
+
         if (h_count==50){
              int err = dht.read();
             h_count=0;
         }
-  myData.humidity = dht.getHumidity();
+ 
         sprintf(buffer, "%2.1f", myData.temperature);
         displayText(buffer, 15, 2);
         sprintf(buffer, "%2.1f", myData.lightLevel);
@@ -90,4 +92,9 @@ float readTemp()
 float readLight()
 {
     return (lightLevel.read())*100.0f;
+}
+
+float readHumidity()
+{
+    return dht.read();
 }
